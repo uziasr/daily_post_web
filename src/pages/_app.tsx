@@ -2,7 +2,7 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 import { Provider, createClient, dedupExchange, fetchExchange } from "urql"
 import { cacheExchange, QueryInput, Cache } from "@urql/exchange-graphcache"
 import theme from '../theme'
-import { MeDocument, LoginMutation, MeQuery, RegisterMutation } from '../generated/graphql'
+import { MeDocument, LoginMutation, MeQuery, RegisterMutation, LogoutMutation } from '../generated/graphql'
 
 function betUpdateQuery<Result, Query>(
   cache: Cache,
@@ -21,38 +21,46 @@ const client = createClient({
   exchanges: [dedupExchange, cacheExchange({
     updates: {
       Mutation: {
+        logout: (_result, args, cache, info) => {
+          betUpdateQuery<LogoutMutation, MeQuery>(
+            cache,
+            { query: MeDocument },
+            _result,
+            () => ({ me: null })
+          )
+        },
         login: (_result, args, cache, info) => {
-            betUpdateQuery<LoginMutation, MeQuery>(
-              cache,
-              { query: MeDocument },
-              _result,
-              (result, query) => { 
-                if(result.login.errors){
-                  return query
-                } else{
-                  return {
-                    me: result.login.user
-                  }
+          betUpdateQuery<LoginMutation, MeQuery>(
+            cache,
+            { query: MeDocument },
+            _result,
+            (result, query) => {
+              if (result.login.errors) {
+                return query
+              } else {
+                return {
+                  me: result.login.user
                 }
               }
-            )
+            }
+          )
         },
         register: (_result, args, cache, info) => {
           betUpdateQuery<RegisterMutation, MeQuery>(
             cache,
             { query: MeDocument },
             _result,
-            (result, query) => { 
-              if(result.register.errors){
+            (result, query) => {
+              if (result.register.errors) {
                 return query
-              } else{
+              } else {
                 return {
                   me: result.register.user
                 }
               }
             }
           )
-      }
+        }
       }
     }
   }), fetchExchange]
