@@ -3,7 +3,7 @@ import Wrapper from '../components/Wrapper';
 import { Formik, Form } from 'formik';
 import forgotPassword from './login';
 import { toErrorMap } from '../utils/toErrorMap';
-import { router } from 'websocket';
+import { useRouter } from "next/router"
 import InputField from '../components/InputField';
 import { Box, Flex, Link, Button } from '@chakra-ui/react';
 import { withUrqlClient } from 'next-urql';
@@ -14,6 +14,8 @@ import { useForgotPasswordMutation } from '../generated/graphql';
 const ForgotPassword: React.FC<{}> = ({}) => {
         const [,forgotPassword] = useForgotPasswordMutation()
         const [complete, setComplete] = useState(false)
+        const router = useRouter();
+
         return (
                 <Wrapper variant="small">
             <Formik
