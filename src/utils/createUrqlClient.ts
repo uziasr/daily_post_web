@@ -1,5 +1,5 @@
-import { dedupExchange, fetchExchange, Exchange, Cache } from "urql"
-import { cacheExchange, Resolver } from "@urql/exchange-graphcache"
+import { dedupExchange, fetchExchange, Exchange } from "urql"
+import { cacheExchange, Resolver, Cache } from "@urql/exchange-graphcache"
 import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutationVariables, DeletePostMutation } from "../generated/graphql"
 import { betterUpdateQuery } from "./betterUpdateQuery"
 import { pipe, tap } from 'wonka';
