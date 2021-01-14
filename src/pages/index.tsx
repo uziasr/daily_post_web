@@ -25,7 +25,7 @@ const Index = () => {
     return (
         <Layout variant="regular">
             <Flex align={"center"}>
-                <Heading>The Daily Post</Heading>
+                <Heading>Fresh Brew</Heading>
                 <NextLink href="/create-post">
                     <Link ml="auto">Create Post</Link>
                 </NextLink>

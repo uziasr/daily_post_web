@@ -15,7 +15,7 @@ import NextLink from "next/link"
 const ChangePassword: NextPage = () => {
     const router = useRouter();
     const [_, changePassword] = useChangePasswordMutation()
-    const [tokenError, setTokenError] = useState()
+    const [tokenError, setTokenError] = useState<undefined | string>()
     return (
         <Wrapper variant="small">
             <Formik
