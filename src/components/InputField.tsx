@@ -13,7 +13,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, textarea, size:_, ...pro
     return (
         <FormControl isInvalid={!!error}>
             <FormLabel htmlFor={field.name}>{label}</FormLabel>
-            { textarea ? <Textarea {...props} {...field} id={field.name} placeholder={props.placeholder} /> :<Input {...props} {...field} id={field.name} placeholder={props.placeholder} />}
+            { textarea ? <Textarea   {...field} id={field.name} placeholder={props.placeholder} /> :<Input  {...field} id={field.name} placeholder={props.placeholder} />}
             {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
         </FormControl>
     );

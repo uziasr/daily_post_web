@@ -34,16 +34,13 @@ const cursorPagination = (): Resolver => {
 
     return (_parent, fieldArgs, cache, info) => {
         const { parentKey: entityKey, fieldName } = info;
-        console.log(entityKey, fieldName)
         const allFields = cache.inspectFields(entityKey);
         const fieldInfos = allFields.filter(info => info.fieldName === fieldName);
         const size = fieldInfos.length;
         if (size === 0) {
             return undefined;
         }
-        console.log("cache", `${fieldName}(${stringifyVariables(fieldArgs)})`)
 
-        console.log(fieldArgs)
         let hasMore = true
         const results: string[] = []
         const isItInTheCache = cache.resolve(cache.resolveFieldByKey(entityKey, `${fieldName}(${stringifyVariables(fieldArgs)})`) as string, "posts")
@@ -120,9 +117,8 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                       }
                       `,
                             { id: postId }
-                        )
+                        ) as any
                         if (data) {
-                            console.log(data.voteStatus === value)
                             if (data.voteStatus === value) {
                                 return
                             }

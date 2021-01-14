@@ -45,7 +45,7 @@ export const NavBar: React.FC<NavBarProps> = ({ }) => {
         <Flex position={"sticky"} top={0} zIndex={1} p={4} bg="tan" align="center">
             <NextLink href="/">
                 <Link>
-                    <Heading>LiReddit</Heading>
+                    <Heading>Daily Post</Heading>
                 </Link>
             </NextLink>
             <Box ml={"auto"} >

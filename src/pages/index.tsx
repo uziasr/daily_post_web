@@ -57,7 +57,7 @@ const Index = () => {
                         cursor: data.posts.posts[data.posts.posts.length - 1].createdAt
                     }
                 )} m="auto" my={8}>Load More</Button>
-            </Flex>) : console.log("hi", data)}
+            </Flex>) : null}
         </Layout>
     )
 }
