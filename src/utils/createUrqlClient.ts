@@ -1,6 +1,6 @@
 import { dedupExchange, fetchExchange, Exchange } from "urql"
 import { cacheExchange, Resolver, Cache } from "@urql/exchange-graphcache"
-import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutationVariables, DeletePostMutation } from "../generated/graphql"
+import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutationVariables, DeletePostMutationVariables } from "../generated/graphql"
 import { betterUpdateQuery } from "./betterUpdateQuery"
 import { pipe, tap } from 'wonka';
 import Router from "next/router"
@@ -13,7 +13,7 @@ export const errorExchange: Exchange = ({ forward }) => ops$ => {
     return pipe(
         forward(ops$),
         tap(({ error }) => {
-            if (error ?.message.includes("not authenticated")) {
+            if (error?.message.includes("not authenticated")) {
                 Router.replace("login")
             }
         })
@@ -103,7 +103,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                     deletePost: (_result, args, cache, info) => {
                         cache.invalidate({
                             __typename: "Post",
-                            id: (args as DeletePostMutation).id
+                            id: (args as DeletePostMutationVariables).id
                         })
                     },
                     vote: (_result, args, cache, info) => {

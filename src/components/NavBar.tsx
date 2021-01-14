@@ -17,7 +17,7 @@ export const NavBar: React.FC<NavBarProps> = ({ }) => {
     let body = null
     if (fetching) {
 
-    } else if (!data ?.me) {
+    } else if (!data?.me) {
         body = (
             <>
                 <NextLink href="/register">
