@@ -85,7 +85,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         cookie = ctx ?.req ?.headers ?.cookie
     }
     return {
-        url: "http://localhost:9000/graphql",
+        url: "https://daily-brew.herokuapp.com/graphql",
         fetchOptions: {
             credentials: "include" as const,
             headers: cookie ? {
